@@ -72,7 +72,7 @@ fprintf(vna, '++eoi 0');
 % Read the start/stop frequencies and number of points from the VNA:
 fprintf(vna, 'STAR?');
 startFreq = char(fread(vna, 30))';
-startFreq = str2num(startFreq(1:24));
+startFreq = str2num(startFreq(1:24)); %Question for jackson: is this going to be replaced by the start and stop frequencies that the user wants to use as their span?
 
 fprintf(vna, 'STOP?');
 stopFreq = char(fread(vna, 30))';
