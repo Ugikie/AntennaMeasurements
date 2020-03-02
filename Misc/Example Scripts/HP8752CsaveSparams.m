@@ -16,7 +16,7 @@ outputfile = input('Desired output filename: ','s');
 % computer's configuration. To get a list of serial ports use the command:
 % seriallist
 % e.g., COMport = 'COM1';
-COMport = '/dev/tty.usbserial-PX2DN8ZM';
+COMport = '/dev/ttyUSB0';
 
 % Remove the output file extension if there is one
 if length(outputfile) > 4
@@ -78,9 +78,9 @@ fprintf(vna, 'STOP?');
 stopFreq = char(fread(vna, 30))';
 stopFreq = str2num(stopFreq(1:24));
 
-fprintf(vna, 'POIN?');
+fprintf(vna, 'POIN1');
 numPoints = char(fread(vna, 30))';
-numPoints = str2num(numPoints(1:24));
+numPoints = 1;
 
 fprintf(vna, 'SCAL?');
 SCAL = char(fread(vna, 30))';
@@ -96,7 +96,7 @@ REFV = str2num(REFV(1:24));
 
 % Compute the expected frequency points from the VNA. The 8720B has a 100
 % KHz frequency resolution, so round to this.
-freq = 1e5*round((startFreq:(stopFreq-startFreq)/(numPoints-1):stopFreq)/1e5);
+freq = 1e5*round((startFreq:(stopFreq-startFreq + 1)/(numPoints-1):stopFreq)/1e5);
 
 % Set the output data format
 fprintf(vna, 'FORM4');
@@ -131,7 +131,7 @@ for n = 1:length(Snames(:,1))
     S(:,n) = dataNums{1} + j*dataNums{2};
 
 end
-
+newS(2,:) = S(1,:)
 % Set to sweep continuously
 fprintf(vna, 'CONT');
 
