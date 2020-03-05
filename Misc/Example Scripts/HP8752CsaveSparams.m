@@ -108,7 +108,7 @@ vna.Timeout = ceil(numPoints/100*0.5);
 
 Snames = ['S11';'S21'];
 
-for n = 1:length(Snames(:,1))
+for n = 1:length(Snames(:,1))##
     fprintf(vna,Snames(n,:))
     pause(2);
         
