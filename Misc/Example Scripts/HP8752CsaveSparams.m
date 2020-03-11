@@ -96,7 +96,7 @@ REFV = str2num(REFV(1:24));
 
 % Compute the expected frequency points from the VNA. The 8720B has a 100
 % KHz frequency resolution, so round to this.
-freq = 1e5*round((startFreq:(stopFreq-startFreq + 1)/(numPoints-1):stopFreq)/1e5);
+freq = 1e5*round((startFreq:(stopFreq-startFreq)/(numPoints-1):stopFreq)/1e5);
 
 % Set the output data format
 fprintf(vna, 'FORM4');
