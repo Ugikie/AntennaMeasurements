@@ -2,10 +2,10 @@ clear all;
 
 AZDegInterval = -90:1:90;
 numPoints = 201;
-rollDegInterval = 0:1:360;
+rollDegInterval = 0:1:0;
 dataToWrite = {datestr(now)};
-startFreq = 1000000;
-stopFreq = 10000000;
+startFreq = 1000000000;
+stopFreq = 10000000000;
 VNAFreqPointsObj = 1e5 * round((startFreq:(stopFreq - startFreq) / (numPoints - 1):stopFreq) / 1e5);
 for AZCurrentDegree = AZDegInterval
                 
@@ -27,3 +27,12 @@ for AZCurrentDegree = AZDegInterval
 end
 
 dataToWrite
+
+measApp.ExportDataAppObj.DataTable.Data = {false,'Freq','AZ','Roll','S21'};
+measApp.ExportDataAppObj.DataTable.Data(1:201,1) = {false};
+measApp.ExportDataAppObj.DataTable.Data(2:201,3) = {-90};
+measApp.ExportDataAppObj.DataTable.Data(2:201,4) = {measApp.DataToWriteObj{2}(1,3,1)};
+for i = 1:length(measApp.DataToWriteObj{2})
+    measApp.ExportDataAppObj.DataTable.Data{i+1,2} = freqNums(i);
+    drawnow();
+end

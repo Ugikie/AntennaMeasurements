@@ -12,7 +12,7 @@ measApp = measApp();
 %| .                   . |
 %[degIntervalAZStop   S21]
 %And the third dimention, is the degInterval for the Roll
-%startFreqMat = [degInterval' S11]
+%startFreqMat = [degInterval' S11]  
 %startFreqMat(:,:,2) = [degInterval' 2*S11]
 %startFreqMat(:,:,3) = [degInterval' 3*S11]
 %dataToWrite = {startFreqMat startFreqMat}
